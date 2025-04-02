@@ -31,7 +31,7 @@
                 }
             ?>
         </div>
-        <a href="ResetFile.php">
+        <a href="./ResetFile.php">
             <button type="button" class="btn btn-secondary">reset</button>
         </a>
         
