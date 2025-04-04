@@ -1,7 +1,7 @@
 <?php
 class ConnexionDB
 {
-    private static $_dbname = "tp1";
+    private static $_dbname = "database";
     private static $_user = "root";
     private static $_pwd = "thekiller1234_";
     private static $_host = "localhost";
