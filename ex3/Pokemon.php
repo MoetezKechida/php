@@ -72,10 +72,11 @@ class Pokemon
             $damage=$baseDamage;
         }
         $p->setHp($damage);
+        return $damage;
     }
     public function whoAmI()
     {
-        echo "pokemon name",$this->name;
+        echo $this->name;
     }
 }
 
