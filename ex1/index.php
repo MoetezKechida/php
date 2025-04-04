@@ -31,7 +31,7 @@ class etudiant{
         if ($this->average() >=0){
             echo "$this->name is admitted";
         }else{
-            echo "$this->name is not rejected";
+            echo "$this->name is rejected";
         }
     }
 }
