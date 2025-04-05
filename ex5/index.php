@@ -1,6 +1,7 @@
 <?php
 
-include_once "Connection.php";
-$db = Connection::getInstance();
+include_once "Users.php";
+include_once "Sections.php";
+
 
 ?>

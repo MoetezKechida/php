@@ -19,8 +19,36 @@ class Connection{
     public static function getInstance(){
         if (!self::$bdd){
             new Connection();
+            self::create_tables();
         }
         return (self::$bdd);
+    }
+    private static function create_tables(){
+        $request = "create table if not exists utilisateur(
+            id int auto_increment primary key,
+            username varchar(20),
+            email varchar(50),
+            password varchar(100),
+            role ENUM('admin', 'user')
+        );";
+        self::$bdd->query($request);
+
+        $request = "create table if not exists section(
+            id int auto_increment primary key,
+            designation varchar(50),
+            description varchar(255)
+        );";
+        self::$bdd->query($request);
+
+        $request = "create table if not exists etudiant(
+            id int auto_increment primary key,
+            name varchar(20),
+            birthday date,
+            image varchar(10),
+            section int,
+            constraint fk_etudiant_section foreign key(section) references section(id)
+        );";
+        self::$bdd->query($request);
     }
 }
 ?>
