@@ -27,6 +27,13 @@ class Users{
 
         return $req->fetch(PDO::FETCH_ASSOC);
     }
+
+    static function emailExists($email){
+        $req = self::getBdd()->prepare('select * from utilisateur where email=?');
+        $req->execute(array($email));
+
+        return $req->fetch(PDO::FETCH_ASSOC) != null;
+    }
 }
 
 ?>
