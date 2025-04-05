@@ -4,19 +4,17 @@
         width:fit-content;
         height:fit-content;
         margin:auto;
+        margin-top: 5%;
+        text-align: left;
         padding:20px;
     }
-    button{
+    #loginButton{
         float:right;
     }
-    a{
-        position:absolute;
-        bottom:0;
-        right:0;
-    }
+    
 
 </style>
-<body>
+<body class="text-center">
     <div class="alert alert-info">
         <form method='post' action='login.php'>
             email:<br>
@@ -26,12 +24,12 @@
             <input type="password" name="password">
             <br>
             <br>
-            <button type="submit">Login</button>
+            <button type="submit" id="loginButton">Login</button>
             <br>
         </form>
     </div>
     <a href="./addUserForm.php">
-        <button>Add user</button>
+        <button>Sign in</button>
     </a>
 </body>
 <?php

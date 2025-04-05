@@ -28,6 +28,12 @@ class Students{
         return $req->fetch(PDO::FETCH_ASSOC);
     }
 
+    static function getStudentBySection($section){
+        $req = self::getBdd()->prepare('select * from etudiant where section=?');
+        $req->execute(array($section));
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     static function getAll(){
         $req = self::getBdd()->query('select * from etudiant');
 

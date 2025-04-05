@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <style>
     header{
@@ -13,18 +14,18 @@ session_start();
     }
     a{
         margin:10px;
-        text-decoration: None;
-        color:white;
         opacity:0.7;
     }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <body>
     <header>
         <h2>Student Management System</h2>
-        <a href="./home.php" style="opacity:1">Home</a>
-        <a href="./studentList.php">Liste des Etudiants</a>
-        <a href="./sectionList.php">Liste des Section</a>
-        <a href="./index.php">Logout</a>
+        <a href="./home.php" style="opacity:1" class="text-white text-decoration-none">Home</a>
+        <a href="./studentList.php" class="text-white text-decoration-none">Liste des Etudiants</a>
+        <a href="./sectionList.php" class="text-white text-decoration-none">Liste des Sections</a>
+        <a href="./index.php" class="text-white text-decoration-none">Logout</a>
     </header>
     <h1>
         Hello, PHP LOVERS! Welcome to your administration Platform

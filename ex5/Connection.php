@@ -4,13 +4,15 @@ class Connection{
     private static $user = "root";
     private static $pwd = "";
     private static $host = "localhost";
-    private static $port = "3307";
+    private static $port = "3306";
 
     private static $bdd = null;
 
     private function __construct(){
         try{
-            self::$bdd = new PDO("mysql:host=" . self::$host . ";port=".self::$port." ;dbname=" . self::$dbname . ";charset=utf8", self::$user, self::$pwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'));
+            self::$bdd = new PDO("mysql:host=" . self::$host . ";port=" . self::$port, self::$user, self::$pwd);
+            self::$bdd->exec("CREATE DATABASE IF NOT EXISTS `" . self::$dbname . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+            self::$bdd = new PDO("mysql:host=" . self::$host . ";port=" . self::$port . ";dbname=" . self::$dbname . ";charset=utf8", self::$user, self::$pwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'));
         } catch (PDOException $e){
             die('Erreur : ' . $e->getMessage());
         }
@@ -44,7 +46,7 @@ class Connection{
             id int auto_increment primary key,
             name varchar(20),
             birthday date,
-            image varchar(10),
+            image varchar(30),
             section int,
             constraint fk_etudiant_section foreign key(section) references section(id)
         );";

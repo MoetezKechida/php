@@ -2,14 +2,8 @@
 include_once "Students.php";
 include_once "Sections.php";
 session_start();
-if(!isset($_GET['idSection']))
-{
-    $students=Students::getAll();
-}
-else
-{
-    $students=Students::getStudentBySection($_GET['idSection']);
-}
+$student=Students::getStudent($_GET['id']);
+
 ?>
 <style>
     header{
@@ -54,7 +48,6 @@ else
             </tr>
         </thead>
         <tbody>
-            <?php foreach($students as $student): ?>
             <tr>
             <td> <?= $student['id']  ?></td>
             <td><?= $student['name']  ?></td>
@@ -64,12 +57,14 @@ else
             $section=Sections::getSection($student['section']);
             echo $section['designation']; ?> 
             </td>
-            <td class="text-center"><a href="detailStudent.php?id=<?= $student['id'] ?>"><i class="bi bi-info-circle-fill"></i></a></td>
-            
             </tr>
-            <?php endforeach ?>
+            
+            
         </tbody>
         </table>
+        <a href="./studentList.php">
+            <button>go back</button>
+        </a>
     </div>
 
 </body>
