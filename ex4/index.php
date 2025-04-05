@@ -1,8 +1,11 @@
 <?php
     include_once "autoloader.php";
-    $db = ConnexionDB::getInstance();
+    
+
+    Student::addStudent('1','moetez','2004-04-16');
+    Student::addStudent('2','dhia','2004-10-19');
     $query = "SELECT * from student";
-    $response = $db->query($query);
+    $response = Student::getBdd()->query($query);
     $elements = $response->fetchAll(PDO::FETCH_OBJ);
 ?>
 <style>
