@@ -13,7 +13,7 @@ if(isset($_GET['idSection'])){
     $students=Students::getStudentBySection($_GET['idSection']);
 }
 else if(isset($_GET['filter'])){
-    $students=Students::getStudentsByFilter($_GET['filter']);
+    $students=Students::getStudentsByNameFilter($_GET['filter']);
 }else{
     $students=Students::getAll();
 }
