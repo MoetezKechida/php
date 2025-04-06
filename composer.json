@@ -1,0 +1,16 @@
+{
+    "name": "web/tpphp",
+    "description": "some php appes",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "selmi med dhia, kechida moetaz"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "phpoffice/phpspreadsheet": "dev-master",
+        "dompdf/dompdf": "dev-master"
+    }
+}

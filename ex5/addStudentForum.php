@@ -29,17 +29,15 @@
             <input type="date" name="birthday" required>
             <br>
             image:<br>
-            <input type="file" name="image" required>
-            <br>
-            <br>
+            <input type="file" class="form-control" name="image" required>
             Section:<br>
             <input type="number" name="Section" required>
             <br>
-            <button type="submit">Add Student</button>
+            <button type="submit" class="btn btn-primary">Add Student</button>
             <br>
         </form>
     </div>
     <a href="./studentList.php">
-        <button>go back</button>
+        <button class="btn btn-primary">go back</button>
     </a>
 </body>

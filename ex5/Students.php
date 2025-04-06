@@ -59,6 +59,15 @@ class Students{
 
         return $response;
     }
+    static function getStudentsByFilter($filter){
+        $req = self::getBdd()->prepare('select * from etudiant
+                                        where name like ?
+                                        or (select designation from section where section.id = etudiant.section) like ?
+                                        or birthday like ?
+                                        or id like ?');
+        $req->execute(array("%$filter%", "%$filter%", "%$filter%", "%$filter%"));
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 ?>

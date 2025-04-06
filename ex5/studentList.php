@@ -2,13 +2,13 @@
 include_once "Students.php";
 include_once "Sections.php";
 session_start();
-if(!isset($_GET['idSection']))
-{
-    $students=Students::getAll();
-}
-else
-{
+if(isset($_GET['idSection'])){
     $students=Students::getStudentBySection($_GET['idSection']);
+}
+else if(isset($_GET['filter'])){
+    $students=Students::getStudentsByFilter($_GET['filter']);
+}else{
+    $students=Students::getAll();
 }
 ?>
 <style>
@@ -24,6 +24,18 @@ else
     a{
         margin:10px;
         opacity:0.7;
+        text-decoration: none;
+    }
+    img{
+        width:40px;
+        border-radius:50%;
+        aspect-ratio: 1;
+    }
+    .extractButton{
+        opacity:1;
+        margin:0;
+        text-decoration: none;
+        border: none;
     }
     
 </style>
@@ -33,38 +45,75 @@ else
     <header>
         <h2>Student Management System</h2>
         <a href="./home.php" class="text-white text-decoration-none">Home</a>
-        <a href="./studentList.php" style="opacity:1" class="text-white text-decoration-none">Liste des Etudiants</a>
-        <a href="./sectionList.php" class="text-white text-decoration-none">Liste des Sections</a>
+        <a href="./studentList.php" style="opacity:1" class="text-white text-decoration-none">Students List</a>
+        <a href="./sectionList.php" class="text-white text-decoration-none">Sections List</a>
         <a href="./index.php" class="text-white text-decoration-none">Logout</a>
     </header>
-        <?php if($_SESSION["userRole"]=='admin')
+    <br>
+    <center>Students List</center>
+    <br>
+    <center>
+        <form action="filterStudents.php" method="post">
+            <input type="text" placeholder="filter by..." name="filter">
+            <button type="submit" class="btn btn-danger" >Filter</button>
+            <?php if($_SESSION["userRole"]=='admin')
             { ?>
             <a href="addStudentForum.php"><i class="bi bi-person-fill-add fs-1"></i></a>
         <?php } ?>
-    <div class="container border w-50">      
+        </form>
+        Copy in
+        <?php 
+        $parameters = "";
+        if (isset($_GET['idSection'])){
+            $parameters = "?idSection=$_GET[idSection]";
+        }
+        else if (isset($_GET['filter'])){
+            $parameters = "?filter=$_GET[filter]";
+        }
+        ?>
+        <a href="./extractStudentsExcel.php<?= $parameters?>" class="extractButton">
+            <button class="btn btn-light">EXCEL</button>
+        </a>
+        <a href="./extractStudentsCSV.php<?= $parameters?>" class="extractButton">
+            <button class="btn btn-light">CSV</button>
+        </a>
+        <a href="./extractStudentsPdf.php<?= $parameters?>" class="extractButton">
+            <button class="btn btn-light">PDF</button>
+        </a>
+    </center>
+    <br>
+        
+    <div class="container border w-50">
         <table class="table table-striped-columns">
         <thead>
             <tr>
-            <th scope="col">id</th>
-            <th scope="col">name</th>
-            <th scope="col">birthday</th>
-            <th scope="col" style="width: 50px;" >image</th>
-            <th scope="col">section</th>
-            <th scope="col" style="width: 50px;">options</th>
+            <th>id</th>
+            <th style="width: 50px;" >image</th>
+            <th>name</th>
+            <th>birthday</th>
+            <th>section</th>
+            <th style="width: 150px;">options</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach($students as $student): ?>
             <tr>
-            <td> <?= $student['id']  ?></td>
+            <td><?= $student['id']  ?> </td>
+            <td><img src="./uploads/<?php echo $student['image']; ?>"></td>
             <td><?= $student['name']  ?></td>
             <td><?= $student['birthday']  ?></td>
-            <td><img src="<?php echo $student['image']; ?>" class="image" style="width:40px"></td>
             <td><?php 
             $section=Sections::getSection($student['section']);
             echo $section['designation']; ?> 
             </td>
-            <td class="text-center"><a href="detailStudent.php?id=<?= $student['id'] ?>"><i class="bi bi-info-circle-fill"></i></a></td>
+            <td class="text-center">
+                <a href="./detailStudent.php?id=<?= $student['id'] ?>"><i class="bi bi-info-circle-fill"></i></a>
+                <?php if($_SESSION["userRole"]=='admin')
+                { ?>
+                    <a href="./deleteStudent.php?id=<?=$student['id']?>"><i class="bi bi-trash"></i></a>
+                    <a href="./updateStudentForm.php?id=<?=$student['id']?>"><i class="bi bi-pencil"></i></a>
+                <?php } ?>
+            </td>
             
             </tr>
             <?php endforeach ?>

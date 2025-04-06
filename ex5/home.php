@@ -23,8 +23,8 @@ session_start();
     <header>
         <h2>Student Management System</h2>
         <a href="./home.php" style="opacity:1" class="text-white text-decoration-none">Home</a>
-        <a href="./studentList.php" class="text-white text-decoration-none">Liste des Etudiants</a>
-        <a href="./sectionList.php" class="text-white text-decoration-none">Liste des Sections</a>
+        <a href="./studentList.php" class="text-white text-decoration-none">Students List</a>
+        <a href="./sectionList.php" class="text-white text-decoration-none">Sections List</a>
         <a href="./index.php" class="text-white text-decoration-none">Logout</a>
     </header>
     <h1>

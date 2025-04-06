@@ -13,7 +13,8 @@ $uploadDir = './uploads/';
 $fileName = basename($image['name']); 
 $filePath = $uploadDir . $fileName;
 move_uploaded_file($image['tmp_name'], $filePath);
-Students::addStudent($name, $birthday, $filePath, $section);
+
+Students::addStudent($name, $birthday, $fileName, $section);
 
 
 ?>
