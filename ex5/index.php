@@ -24,12 +24,12 @@
             <input type="password" name="password">
             <br>
             <br>
-            <button type="submit" id="loginButton">Login</button>
+            <button type="submit" id="loginButton" class="btn btn-primary">Login</button>
             <br>
         </form>
     </div>
     <a href="./addUserForm.php">
-        <button>Sign in</button>
+        <button class="btn btn-primary">Sign up</button>
     </a>
 </body>
 <?php

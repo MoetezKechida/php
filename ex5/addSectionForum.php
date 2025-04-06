@@ -29,11 +29,12 @@
             description:<br>
             <input type="text" name="description" required>
             <br>
-            <button type="submit">Add Section</button>
+            <br>
+            <button type="submit" class="btn btn-primary">Add Section</button>
             <br>
         </form>
     </div>
     <a href="./sectionList.php">
-        <button>go back</button>
+        <button class="btn btn-primary">go back</button>
     </a>
 </body>

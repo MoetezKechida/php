@@ -16,5 +16,6 @@ move_uploaded_file($image['tmp_name'], $filePath);
 
 Students::addStudent($name, $birthday, $fileName, $section);
 
+header("Location: ./studentList.php");
 
 ?>

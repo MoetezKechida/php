@@ -9,16 +9,14 @@ include_once "Students.php";
 include_once "Sections.php";
 
 session_start();
-if(isset($_GET['idSection'])){
-    $students=Students::getStudentBySection($_GET['idSection']);
-}
-else if(isset($_GET['filter'])){
-    $students=Students::getStudentsByFilter($_GET['filter']);
+
+if(isset($_GET['filter'])){
+    $sections=Sections::getSectionsByFilter($_GET['filter']);
 }else{
-    $students=Students::getAll();
+    $sections=Sections::getAll();
 }
 
-if(count($students) > 0){
+if(count($sections) > 0){
     $options = new Options();
     $options->set('isHtml5ParserEnabled', true);
     $options->set('isPhpEnabled', true);
@@ -38,21 +36,17 @@ if(count($students) > 0){
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>image</th>
-                    <th>Name</th>
-                    <th>Birthday</th>
-                    <th>Section</th>
+                    <th>designation</th>
+                    <th>description</th>
                 </tr>
             </thead>
             <tbody>';
 
-    foreach ($students as $student){
+    foreach ($sections as $section){
         $html .= '<tr>
-                    <td>' . $student['id'] . '</td>
-                    <td>' . $student['image'] . '</td>
-                    <td>' . $student['name'] . '</td>
-                    <td>' . $student['birthday'] . '</td>
-                    <td>' . Sections::getSection($student['section'])['designation'] . '</td>
+                    <td>' . $section['id'] . '</td>
+                    <td>' . $section['designation'] . '</td>
+                    <td>' . $section['description'] . '</td>
                     </tr>';
     }
 
@@ -64,6 +58,6 @@ if(count($students) > 0){
 
     $dompdf->render();
 
-    $dompdf->stream('students.pdf', array('Attachment' => 0));
+    $dompdf->stream('sections.pdf', array('Attachment' => 0));
 }
 ?>

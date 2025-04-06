@@ -1,8 +1,11 @@
 <?php
 include_once "Sections.php";
 session_start();
-
-$sections = Sections::getAll();
+if(isset($_GET['filter'])){
+    $sections = Sections::getSectionsByFilter($_GET['filter']);
+}else{
+    $sections = Sections::getAll();
+}
 
 ?>
 <style>
@@ -19,6 +22,12 @@ $sections = Sections::getAll();
         margin:10px;
         opacity:0.7;
     }
+    .extractButton{
+        opacity:1;
+        margin:0;
+        text-decoration: none;
+        border: none;
+    }
     
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -31,10 +40,36 @@ $sections = Sections::getAll();
         <a href="./sectionList.php" style="opacity:1" class="text-white text-decoration-none">Sections List</a>
         <a href="./index.php" class="text-white text-decoration-none">Logout</a>
     </header>
-    <?php if($_SESSION["userRole"]=='admin')
-            { ?>
-            <a href="addSectionForum.php"><i class="bi bi-plus-circle-fill fs-1"></i></a>
-    <?php } ?>
+    <br>
+    <center>Sections List</center>
+    <br>
+    <center>
+        <form action="filterSections.php" method="post">
+            <input type="text" placeholder="filter by..." name="filter">
+            <button type="submit" class="btn btn-danger" >Filter</button>
+
+            <?php if($_SESSION["userRole"]=='admin'){ ?>
+                    <a href="addSectionForum.php"><i class="bi bi-plus-circle-fill fs-1"></i></a>
+            <?php } ?>
+        </form>
+        Copy in
+        <?php 
+        $parameters = "";
+        if (isset($_GET['filter'])){
+            $parameters = "?filter=$_GET[filter]";
+        }
+        ?>
+        <a href="./extractSectionsExcel.php<?= $parameters?>" class="extractButton">
+            <button class="btn btn-light">EXCEL</button>
+        </a>
+        <a href="./extractSectionsCSV.php<?= $parameters?>" class="extractButton">
+            <button class="btn btn-light">CSV</button>
+        </a>
+        <a href="./extractSectionsPdf.php<?= $parameters?>" class="extractButton">
+            <button class="btn btn-light">PDF</button>
+        </a>
+    </center>
+    <br>
     <div class="container border w-50">      
         <table class="table table-striped-columns">
         <thead>

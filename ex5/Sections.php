@@ -46,6 +46,14 @@ class Sections{
 
         return $response;
     }
+    static function getSectionsByFilter($filter){
+        $req = self::getBdd()->prepare('select * from section
+                                        where designation like ?
+                                        or description like ?
+                                        or id like ?');
+        $req->execute(array("%$filter%", "%$filter%", "%$filter%"));
+        return $req->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 ?>

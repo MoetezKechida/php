@@ -47,11 +47,11 @@
             <input type="password" name="password2">
             <br>
             <br>
-            <button type="submit">Add user</button>
+            <button type="submit" class="btn btn-primary">Add user</button>
             <br>
         </form>
     </div>
     <a href="./index.php">
-        <button>go back</button>
+        <button class="btn btn-primary">go back</button>
     </a>
 </body>
