@@ -6,11 +6,16 @@ if(isset($_GET['idSection'])){
     $students=Students::getStudentBySection($_GET['idSection']);
 }
 else if(isset($_GET['filter'])){
-    $students=Students::getStudentsByFilter($_GET['filter']);
+    $students=Students::getStudentsByNameFilter($_GET['filter']);
 }else{
     $students=Students::getAll();
 }
 ?>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
 <style>
     header{
         background-color:rgb(45, 70, 160);
@@ -54,7 +59,7 @@ else if(isset($_GET['filter'])){
     <br>
     <center>
         <form action="filterStudents.php" method="post">
-            <input type="text" placeholder="filter by..." name="filter">
+            <input type="text" placeholder="filter by name" name="filter">
             <button type="submit" class="btn btn-danger" >Filter</button>
             <?php if($_SESSION["userRole"]=='admin')
             { ?>
@@ -84,7 +89,7 @@ else if(isset($_GET['filter'])){
     <br>
         
     <div class="container border w-50">
-        <table class="table table-striped-columns">
+        <table class="table table-striped-columns" id="table">
         <thead>
             <tr>
             <th>id</th>
@@ -122,3 +127,8 @@ else if(isset($_GET['filter'])){
     </div>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new DataTable(document.getElementById('table'), {pageLength: 2 });
+    });
+</script>

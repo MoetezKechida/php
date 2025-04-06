@@ -10,16 +10,7 @@ include_once "Sections.php";
 
 session_start();
 
-if(isset($_GET['filter'])){
-    $sections=Sections::getSectionsByFilter($_GET['filter']);
-}else{
-    $sections=Sections::getAll();
-}
-
-$parameters = "";
-if (isset($_GET['filter'])){
-    $parameters = "?filter=$_GET[filter]";
-}
+$sections=Sections::getAll();
 
 if(count($sections) > 0){
 
@@ -49,5 +40,5 @@ if(count($sections) > 0){
     $writer->save('php://output');
     exit;
 }
-header("Location: ./sectionList.php$parameters");
+header("Location: ./sectionList.php");
 ?>

@@ -1,13 +1,13 @@
 <?php
 include_once "Sections.php";
 session_start();
-if(isset($_GET['filter'])){
-    $sections = Sections::getSectionsByFilter($_GET['filter']);
-}else{
-    $sections = Sections::getAll();
-}
+$sections = Sections::getAll();
 
 ?>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
 <style>
     header{
         background-color:rgb(45, 70, 160);
@@ -44,14 +44,6 @@ if(isset($_GET['filter'])){
     <center>Sections List</center>
     <br>
     <center>
-        <form action="filterSections.php" method="post">
-            <input type="text" placeholder="filter by..." name="filter">
-            <button type="submit" class="btn btn-danger" >Filter</button>
-
-            <?php if($_SESSION["userRole"]=='admin'){ ?>
-                    <a href="addSectionForum.php"><i class="bi bi-plus-circle-fill fs-1"></i></a>
-            <?php } ?>
-        </form>
         Copy in
         <?php 
         $parameters = "";
@@ -68,10 +60,13 @@ if(isset($_GET['filter'])){
         <a href="./extractSectionsPdf.php<?= $parameters?>" class="extractButton">
             <button class="btn btn-light">PDF</button>
         </a>
+        <?php if($_SESSION["userRole"]=='admin'){ ?>
+                <a href="addSectionForum.php"><i class="bi bi-plus-circle-fill fs-1"></i></a>
+        <?php } ?>
     </center>
     <br>
     <div class="container border w-50">      
-        <table class="table table-striped-columns">
+        <table class="table table-striped-columns" id="table">
         <thead>
             <tr>
             <th scope="col">id</th>
@@ -93,5 +88,9 @@ if(isset($_GET['filter'])){
         </tbody>
         </table>
     </div>
-
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new DataTable(document.getElementById('table'), {pageLength: 2 });
+    });
+</script>

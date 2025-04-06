@@ -10,11 +10,7 @@ include_once "Sections.php";
 
 session_start();
 
-if(isset($_GET['filter'])){
-    $sections=Sections::getSectionsByFilter($_GET['filter']);
-}else{
-    $sections=Sections::getAll();
-}
+$sections=Sections::getAll();
 
 if(count($sections) > 0){
     $options = new Options();
