@@ -19,7 +19,7 @@ class Student{
         $req->execute(array($id));
         if($req->fetch(PDO::FETCH_ASSOC)==null)
         {
-            $req = self::getBdd()->prepare('insert into utilisateur (id, name, birthday) values(?,?,?)');
+            $req = self::getBdd()->prepare('insert into student (id, name, birthday) values(?,?,?)');
             $req->execute(array($id, $name, $birthday));
         }
     }
